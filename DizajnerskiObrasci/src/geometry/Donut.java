@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
+import java.util.Objects;
 
 
 public class Donut extends Shape  {
@@ -14,46 +15,28 @@ public class Donut extends Shape  {
 	Color color1;
 	Color color2;
 	
-
-	
-	
 	public Donut() {
-
+		super();
 	}
 	public Donut(Point center, int radius, int innerRadius) {
-		/*
-		 * setCenter(center); // ovo je private pa mora ovako this.radius = radius; //
-		 * ovo je protected pa moze ovako setSelected(selected); this.innerRadius =
-		 * innerRadius;
-		 */
-
-		// drugi nacin
 		this.center= center;
 		this.radius= radius;
 		this.innerRadius = innerRadius;
 	}
 
 	public Donut(Point center, int radius, int innerRadius, boolean selected) {
-		/*
-		 * setCenter(center); // ovo je private pa mora ovako this.radius = radius; //
-		 * ovo je protected pa moze ovako setSelected(selected); this.innerRadius =
-		 * innerRadius;
-		 */
-
-		// drugi nacin
 		this(center,radius,innerRadius);
 		setSelected(selected);
 	}
 	
 	public Donut(Point center, int radius, int innerRadius, boolean selected,Color borderColor,Color fillColor) {
-		
 		this(center,radius,innerRadius,selected);
 		setBorderColor(borderColor);
 		setFillColor(fillColor);
-		
 	}
 
-	public boolean equals(Object obj) {
+	//Stara equals metoda
+	/*public boolean equals(Object obj) {
 		if (obj instanceof Donut) {
 			Donut pomocni = (Donut) obj;
 			if (super.equals(pomocni) && innerRadius == pomocni.innerRadius) {
@@ -64,41 +47,35 @@ public class Donut extends Shape  {
 		} else {
 			return false;
 		}
-	}
+	}*/
+	
+	@Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Donut)) return false;
+        Donut other = (Donut) obj;
+        return radius == other.radius && 
+               innerRadius == other.innerRadius && 
+               Objects.equals(center, other.center);
+    }
 	
 	public boolean contains(int x, int y) {
-		return this.center.distance(x, y) <= radius
-				&& this.getCenter().distance(x,y) >= innerRadius;
+		double d = center.distance(x, y);
+        return d <= radius && d >= innerRadius;
 	}
 
 	public boolean contains(Point clickPoint) {
-		return this.center.distance(clickPoint.getX(), clickPoint.getY()) <= radius
-				&& this.getCenter().distance(clickPoint.getX(), clickPoint.getY()) >= innerRadius;
+		if (clickPoint == null) return false;
+		return this.contains(clickPoint.getX(), clickPoint.getY());
 	}
 
 	public double area() {
-		return (radius * getRadius() * Math.PI) - innerRadius * innerRadius * Math.PI;
+		return (radius * radius * Math.PI) - innerRadius * innerRadius * Math.PI;
 	}
 	
-	public void draw(Graphics g) {
-		/*g.setColor(color1);
-		g.drawOval(center.getX()-radius, center.getY()-radius,
-				2*radius, 2*radius);
-		
-		
-		
-		
-		g.setColor(color2);
-		g.fillOval(center.getX()-radius + 1, center.getY()-radius + 1,
-				2*radius - 2, 2*radius - 2);
-		g.setColor(Color.WHITE);
-		g.fillOval(getCenter().getX()-innerRadius + 1, getCenter().getY()-innerRadius + 1,
-				2*innerRadius - 2, 2*innerRadius - 2);
-		g.setColor(color1);
-		g.drawOval(getCenter().getX()-innerRadius, getCenter().getY()-innerRadius,
-				2*innerRadius, 2*innerRadius);
-				*/
-				Ellipse2D ellipseInner = new Ellipse2D.Float(getCenter().getX()-innerRadius + 1, getCenter().getY()-innerRadius + 1,
+	//Stara draw metoda
+	/*public void draw(Graphics g) {
+		Ellipse2D ellipseInner = new Ellipse2D.Float(getCenter().getX()-innerRadius + 1, getCenter().getY()-innerRadius + 1,
 				2*innerRadius - 2, 2*innerRadius - 2);
 		Ellipse2D ellipseOuter = new Ellipse2D.Float(center.getX()-radius + 1, center.getY()-radius + 1,
 				2*radius - 2, 2*radius - 2);
@@ -107,11 +84,7 @@ public class Donut extends Shape  {
 		out.subtract(in);
 		g.setColor(getFillColor());
 		((Graphics2D) g).fill(out);
-		
-		
-		
 		if (isSelected()) {
-			
 			g.setColor(Color.BLUE);
 			g.drawRect(center.getX() - 2, center.getY() - 2, 4, 4);
 			g.drawRect(center.getX() - radius - 2, center.getY() - 2, 4, 4);
@@ -119,7 +92,6 @@ public class Donut extends Shape  {
 			g.drawRect(center.getX() - 2, center.getY() - radius - 2, 4, 4);
 			g.drawRect(center.getX() - 2, center.getY() + radius - 2, 4, 4);
 			g.setColor(Color.black);
-			
 			
 			g.setColor(Color.BLUE);
 			g.drawRect(getCenter().getX() - 2, getCenter().getY() - 2, 4, 4);
@@ -129,15 +101,51 @@ public class Donut extends Shape  {
 			g.drawRect(getCenter().getX() - 2, getCenter().getY() + innerRadius - 2, 4, 4);
 			g.setColor(Color.black);
 		}
-		
-		
-	}
+	}*/
 	
+	@Override
+    public void draw(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        Ellipse2D outer = new Ellipse2D.Double(center.getX() - radius, center.getY() - radius, 2 * radius, 2 * radius);
+        Ellipse2D inner = new Ellipse2D.Double(center.getX() - innerRadius, center.getY() - innerRadius, 2 * innerRadius, 2 * innerRadius);
+        
+        Area donutArea = new Area(outer);
+        donutArea.subtract(new Area(inner));
+
+        g2d.setColor(getFillColor());
+        g2d.fill(donutArea);
+
+        g2d.setColor(getBorderColor());
+        g2d.draw(donutArea);
+
+        if (isSelected()) {
+            drawSelectionMarkers(g);
+        }
+    }
+
+    private void drawSelectionMarkers(Graphics g) {
+        g.setColor(Color.BLUE);
+        drawMarker(g, center.getX(), center.getY());
+        drawCircleMarkers(g, radius);
+        drawCircleMarkers(g, innerRadius);
+    }
+
+    private void drawCircleMarkers(Graphics g, int r) {
+        drawMarker(g, center.getX() - r, center.getY());
+        drawMarker(g, center.getX() + r, center.getY());
+        drawMarker(g, center.getX(), center.getY() - r);
+        drawMarker(g, center.getX(), center.getY() + r);
+    }
+
+    private void drawMarker(Graphics g, int x, int y) {
+        g.drawRect(x - 2, y - 2, 4, 4);
+    }
 	
 	public int compareTo(Object obj) {
 		if(obj instanceof Donut) {
-			Donut shapeToCompare = (Donut)obj;
-			return (int)(this.area() - shapeToCompare.area());
+			Donut temp = (Donut)obj;
+			//return (int)(this.area() - temp.area());
+			return Double.compare(this.area(), temp.area()); //preciznije
 		}
 		return 0;
 	}
@@ -149,12 +157,30 @@ public class Donut extends Shape  {
 		donut.setInnerRadius(this.getInnerRadius());
 		donut.setBorderColor(this.getBorderColor());
 		donut.setFillColor(this.getFillColor());
-		
 		return donut;
 	}
 	
+	//Stara toString mtoda
+	/*public String toString() {
+		return "Center=" + center + ", radius=" + radius + ", innerRadius=" + innerRadius 
+				+ ", borderColor= " + getBorderColor() + ", fillColor= " + getFillColor();
+	}*/
 	
+	//Nova toString metoda
+	@Override
+    public String toString() {
+        return String.format("Donut: center=%s, radius=%d, innerRadius=%d, color=%s, fill=%s", 
+                center, radius, innerRadius, getBorderColor(), getFillColor());
+    }
+	
+	public void moveTo(int x, int y) {
+		center.moveTo(x, y);
+	}
 
+	public void moveBy(int x, int y) {
+		center.moveBy(x, y);
+	}
+	
 	public int getInnerRadius() {
 		return innerRadius;
 	}
@@ -162,47 +188,10 @@ public class Donut extends Shape  {
 	public void setInnerRadius(int innerRadius) {
 		this.innerRadius = innerRadius;
 	}
-
-	public String toString() {
-		// Center=(x,y), radius= radius, innerRadius= innerRadius
-		return "Center=" + center + ", radius=" + radius + ", innerRadius=" + innerRadius 
-				+ ", borderColor= " + getBorderColor() + ", fillColor= " + getFillColor();
-	}
-	
-	public void moveTo(int x, int y) {
-		center.moveBy(x, y);
-		
-	}
-	
-	public void moveBy(int x, int y) {
-		center.moveBy(x, y);
-		
-	}
-	
-	/*public Color getColor1() {
-		return color1;
-	}
-
-
-	public void setColor1(Color color1) {
-		this.color1 = color1;
-	}
-
-
-	public Color getColor2() {
-		return color2;
-	}
-
-
-	public void setColor2(Color color2) {
-		this.color2 = color2;
-	}*/
-	
 	
 	public void setRadius(int radius) {
 		this.radius = radius;
 	}
-	
 	
 	public int getRadius() {
 		return radius;

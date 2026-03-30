@@ -16,27 +16,16 @@ public class UndoCmd implements Command {
 	}
 	@Override
 	public void execute() {
-		// TODO Auto-generated method stub
-		
-		
-		
 		if (command instanceof SelectCmd) {
 			command.execute();
-			
 		}
 		else {
 			command.unexecute();
 		}
-		
-		
-		 
-		
 		commandList.remove(command);
 		savedCommands.push(command);
-		
-		}
+	}
 	
-
 	@Override
 	public void unexecute() {
 		// TODO Auto-generated method stub

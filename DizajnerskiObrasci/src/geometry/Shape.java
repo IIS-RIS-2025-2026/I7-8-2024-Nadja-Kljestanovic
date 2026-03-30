@@ -7,26 +7,25 @@ import java.io.Serializable;
 public abstract class Shape implements Moveable, Comparable,Serializable {
 
 	private boolean selected;
-	
 	private Color borderColor;
 	private Color fillColor;
 	
-    
-	
-
 	public Shape() {
+		super();
+	}
 
-	}
-	
 	public Shape(boolean selected) {
+		this();
 		this.selected = selected;
 	}
-	public Shape(boolean selected,Color borderColor) {
-		this.selected = selected;
-		this.borderColor=borderColor;
+
+	public Shape(boolean selected, Color borderColor) {
+		this(selected);
+		this.borderColor = borderColor;
 	}
-	public Shape(boolean selected,Color borderColor,Color fillColor) {
-		this(selected,borderColor);
+
+	public Shape(boolean selected, Color borderColor, Color fillColor) {
+		this(selected, borderColor);
 		this.fillColor = fillColor;
 	}
 
@@ -56,11 +55,4 @@ public abstract class Shape implements Moveable, Comparable,Serializable {
 	public void setFillColor(Color fillColor) {
 		this.fillColor = fillColor;
 	}
-//Comparable racuna udaljenost od koordinatnog pocetka
-//string poredimo sa equals
-
-
-
-
-
 } 

@@ -4,11 +4,8 @@ import geometry.Line;
 import mvc.DrawingModel;
 
 public class RemoveLineCmd implements Command {
-
 	private Line line;
 	private DrawingModel model;
-	
-	
 	
 	public RemoveLineCmd(Line line, DrawingModel model) {
 		
@@ -19,13 +16,11 @@ public class RemoveLineCmd implements Command {
 	@Override
 	public void execute() {
 		model.remove(line);
-
 	}
 
 	@Override
 	public void unexecute() {
 		model.add(line);
-
 	}
 
 }

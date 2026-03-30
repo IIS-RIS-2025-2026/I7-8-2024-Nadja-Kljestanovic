@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class RedoCmd implements Command {
-
-	
-
 	private ArrayList<Command> commandList;
 	private Stack<Command> savedCommands;
 	private Command command;
@@ -17,28 +14,9 @@ public class RedoCmd implements Command {
 	}
 	@Override
 	public void execute() {
-		// TODO Auto-generated method stub
-		
-			
-		
-		
-		/*if (command instanceof SelectCmd) {
-			savedCommands.peek().execute();
-		}
-		else {
-			savedCommands.peek().execute();
-		}*/
-		
 		savedCommands.peek().execute();
-		
-		
-		 
-		
 		commandList.add(savedCommands.peek());
 		savedCommands.pop();
-		
-		
-		
 	}
 
 	@Override
