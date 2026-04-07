@@ -46,16 +46,17 @@ public class ToBackCmd implements Command {
 
 	//Zamena sa prethodnim
 	private void swapWithPrevious() {
-		Shape temp = model.get(currentIndex);
-		model.getShapes().set(currentIndex, model.getShapes().get(currentIndex - 1));
-		model.getShapes().set(currentIndex - 1, temp);
-		currentIndex--; 
+	    Shape temp = model.get(currentIndex);
+	    model.getShapes().set(currentIndex, model.getShapes().get(currentIndex - 1));
+	    model.getShapes().set(currentIndex - 1, temp);
+	    currentIndex--;
 	}
 
 	//Zamena sa sledećim
 	private void swapWithNext() {
-		Shape temp = model.get(currentIndex - 1);
-		model.getShapes().set(currentIndex - 1, model.getShapes().get(currentIndex));
-		model.getShapes().set(currentIndex, temp);
+	    Shape temp = model.get(currentIndex); 
+	    model.getShapes().set(currentIndex, model.getShapes().get(currentIndex + 1));
+	    model.getShapes().set(currentIndex + 1, temp);
+	    currentIndex++; 
 	}
 }
