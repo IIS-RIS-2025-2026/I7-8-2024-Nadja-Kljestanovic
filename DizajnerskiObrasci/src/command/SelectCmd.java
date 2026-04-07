@@ -1,26 +1,26 @@
 package command;
 
 import java.util.ArrayList;
-
 import geometry.HexagonAdapter;
 import geometry.Shape;
 import mvc.DrawingController;
 
-public class SelectCmd implements Command  {
+public class SelectCmd implements Command {
 	private Shape shape;
 	private ArrayList<Shape> listOfSelectedShapes;
-	private String textForSelect;
 	private DrawingController controller;
 	private boolean selectFlag;
-	 
-	public SelectCmd(Shape shape,ArrayList<Shape> listOfSelectedShapes,DrawingController controller,boolean selectFlag) {
+	private String textForSelect;
+
+	public SelectCmd(Shape shape, ArrayList<Shape> listOfSelectedShapes, DrawingController controller, boolean selectFlag) {
 		this.shape = shape;
 		this.listOfSelectedShapes = listOfSelectedShapes;
-		this.controller= controller;
+		this.controller = controller;
 		this.selectFlag = selectFlag;
 	}
 
-	@Override
+	//Stara execute emtoda
+	/*@Override
 	public void execute() {
 		 if (shape.isSelected() == false) {
 			 listOfSelectedShapes.add(shape);
@@ -43,8 +43,23 @@ public class SelectCmd implements Command  {
 		 shape.setSelected(!shape.isSelected());
 		 return ;
 	}
-
+	*/
+	
+	//Nova execute meotda
 	@Override
+	public void execute() {
+		if (!shape.isSelected()) {
+			selectShape();
+		} else {
+			deselectShape();
+		}
+		
+		toggleShapeSelectionState();
+		controller.setTextForSelect(textForSelect);
+	}
+	
+	//Stara unexecute emtoda
+	/*@Override
 	public void unexecute() {
 		 shape.setSelected(!shape.isSelected());
 		 
@@ -54,5 +69,42 @@ public class SelectCmd implements Command  {
 			 listOfSelectedShapes.add(shape);
 		 }
 		 return ;
+	}
+	*/
+
+	@Override
+	public void unexecute() {
+		toggleShapeSelectionState();
+
+		if (!shape.isSelected()) {
+			listOfSelectedShapes.remove(shape);
+		} else {
+			listOfSelectedShapes.add(shape);
+		}
+	}
+
+	//Dodavanje selektovanog oblika u listu
+	private void selectShape() {
+		listOfSelectedShapes.add(shape);
+		textForSelect = "Selected " + getShapeName() + " " + shape;
+	}
+
+	//Brisanje deselektovanog oblika
+	private void deselectShape() {
+		listOfSelectedShapes.remove(shape);
+		textForSelect = "Deselected " + getShapeName() + " " + shape;
+	}
+
+	//Selektovanje/deselektovanje 
+	private void toggleShapeSelectionState() {
+		shape.setSelected(!shape.isSelected());
+	}
+
+	//Dobijanje imena oblika
+	private String getShapeName() {
+		if (shape instanceof HexagonAdapter) {
+			return "Hexagon";
+		}
+		return shape.getClass().getSimpleName();
 	}
 }
