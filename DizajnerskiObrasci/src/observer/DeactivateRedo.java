@@ -2,19 +2,18 @@ package observer;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-
 import mvc.DrawingFrame;
 
-public class DeactivateRedo  implements PropertyChangeListener{
+public class DeactivateRedo implements PropertyChangeListener {
 	
-	private DrawingFrame frame;
-	private int savedCommandsSize;
+	private final DrawingFrame frame;
 	
 	public DeactivateRedo(DrawingFrame frame) {
 		this.frame = frame;
 	}
 	
-	
+	// Stara propertyChange metoda
+	/*
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		if (event.getPropertyName() == "savedCommandsSize") {
@@ -25,7 +24,15 @@ public class DeactivateRedo  implements PropertyChangeListener{
 				frame.getBtnRedo().setEnabled(false);
 			}
 		}
-		
 	}
+	*/
 
+	// Nova propertyChange metoda
+	@Override
+	public void propertyChange(PropertyChangeEvent event) {
+		if ("savedCommandsSize".equals(event.getPropertyName())) {
+			int savedCommandsSize = (int) event.getNewValue();
+			frame.getBtnRedo().setEnabled(savedCommandsSize > 0);
+		}
+	}
 }

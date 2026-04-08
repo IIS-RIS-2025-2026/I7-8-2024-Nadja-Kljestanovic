@@ -5,13 +5,12 @@ import java.beans.PropertyChangeListener;
 
 import mvc.DrawingFrame;
 
-public class DeactivateDirections implements PropertyChangeListener{
-
+public class DeactivateDirections /*implements PropertyChangeListener*/{
+	//Ne koristi se
+	/*private DrawingFrame frame;
+	private int numberOfShapes;*/
 	
-	private DrawingFrame frame;
-	private int numberOfShapes;
-	
-	public DeactivateDirections(DrawingFrame frame) {
+	/*public DeactivateDirections(DrawingFrame frame) {
 		this.frame = frame;
 	}
 	
@@ -21,7 +20,6 @@ public class DeactivateDirections implements PropertyChangeListener{
 			this.numberOfShapes = (int)event.getNewValue();
 			
 		}
-		
-	}
+	}*/
 	
 }
