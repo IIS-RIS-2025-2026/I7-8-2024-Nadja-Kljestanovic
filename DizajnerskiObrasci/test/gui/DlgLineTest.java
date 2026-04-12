@@ -15,22 +15,22 @@ class DlgLineTest {
 
 	@Test
 	void testCheckIfNumberWithValidInput() {
-		assertTrue(dialog.CheckIfNumber("50"), "Treba da vrati true za validan ceo broj.");
-		assertTrue(dialog.CheckIfNumber("0"), "Treba da vrati true za nulu.");
+		assertTrue(dialog.isNumeric("50"), "Treba da vrati true za validan ceo broj.");
+		assertTrue(dialog.isNumeric("0"), "Treba da vrati true za nulu.");
 	}
 
 	@Test
 	void testCheckIfNumberWithInvalidInput() {
-		assertFalse(dialog.CheckIfNumber("text"), "Treba da vrati false za tekst.");
-		assertFalse(dialog.CheckIfNumber(""), "Treba da vrati false za prazan string.");
-		assertFalse(dialog.CheckIfNumber(null), "Treba da vrati false za null.");
-		assertFalse(dialog.CheckIfNumber("12.3"), "Treba da vrati false za decimalni broj.");
+		assertFalse(dialog.isNumeric("text"), "Treba da vrati false za tekst.");
+		assertFalse(dialog.isNumeric(""), "Treba da vrati false za prazan string.");
+		assertFalse(dialog.isNumeric(null), "Treba da vrati false za null.");
+		assertFalse(dialog.isNumeric("12.3"), "Treba da vrati false za decimalni broj.");
 	}
 
 	@Test
 	void testInitialState() {
 		assertFalse(dialog.isCancelClicked(), "Inicijalno cancelClicked treba da bude false.");
-		assertNull(dialog.getC1(), "Inicijalna boja c1 treba da bude null.");
+		assertEquals(Color.BLACK, dialog.getLineColor(), "Inicijalna boja c1 treba da bude null.");
 	}
 
 	@Test
@@ -41,8 +41,8 @@ class DlgLineTest {
 
 	@Test
 	void testColorGetterSetter() {
-		dialog.setC1(Color.BLUE);
-		assertEquals(Color.BLUE, dialog.getC1(), "Boja treba da bude ispravno postavljena i pročitana.");
+		dialog.setLineColor(Color.BLUE);
+		assertEquals(Color.BLUE, dialog.getLineColor(), "Boja treba da bude ispravno postavljena i pročitana.");
 	}
 
 	@Test

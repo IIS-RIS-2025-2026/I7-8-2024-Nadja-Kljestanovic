@@ -6,50 +6,49 @@ import org.junit.jupiter.api.Test;
 import java.awt.Color;
 
 class DlgPointTest {
-	private DlgPoint dialog;
+    private DlgPoint dialog;
 
-	@BeforeEach
-	void setUp() {
-		dialog = new DlgPoint();
-	}
+    @BeforeEach
+    void setUp() {
+        dialog = new DlgPoint();
+    }
 
-	@Test
-	void testCheckIfNumberValid() {
-		assertTrue(dialog.CheckIfNumber("100"));
-		assertTrue(dialog.CheckIfNumber("0"));
-	}
+    @Test
+    void testIsNumeric() {
+        assertTrue(dialog.isNumeric("50"));
+        assertFalse(dialog.isNumeric("abc"));
+        assertFalse(dialog.isNumeric(""));
+        assertFalse(dialog.isNumeric(null));
+    }
 
-	@Test
-	void testCheckIfNumberInvalid() {
-		assertFalse(dialog.CheckIfNumber("abc"));
-		assertFalse(dialog.CheckIfNumber(""));
-		assertFalse(dialog.CheckIfNumber(null));
-	}
+    @Test
+    void testInitialState() {
+        assertFalse(dialog.isCommited(), "Inicijalno commited treba da bude false.");
+        assertFalse(dialog.isCancelClicked(), "Inicijalno cancelClicked treba da bude false.");
+        assertEquals(Color.BLACK, dialog.getPointColor(), "Inicijalna boja treba da bude crna.");
+    }
 
-	@Test
-	void testInitialStates() {
-		assertFalse(dialog.isCancelClicked(), "Inicijalno cancelClicked mora biti false.");
-		assertFalse(dialog.isCommited(), "Inicijalno commited mora biti false.");
-		assertEquals(Color.BLACK, dialog.getBtnColor().getBackground());
-	}
+    @Test
+    void testSettersAndGetters() {
+        dialog.setPointColor(Color.GREEN);
+        dialog.setCommited(true);
+        
+        assertEquals(Color.GREEN, dialog.getPointColor());
+        assertTrue(dialog.isCommited());
+    }
 
-	@Test
-	void testSettersAndGetters() {
-		dialog.setCommited(true);
-		dialog.setCancelClicked(true);
-		dialog.setColor(Color.RED);
-		
-		assertTrue(dialog.isCommited());
-		assertTrue(dialog.isCancelClicked());
-		assertEquals(Color.RED, dialog.getColor());
-	}
+    @Test
+    void testTextFields() {
+        dialog.getTxtX().setText("15");
+        dialog.getTxtY().setText("25");
+        
+        assertEquals("15", dialog.getTxtX().getText());
+        assertEquals("25", dialog.getTxtY().getText());
+    }
 
-	@Test
-	void testTextFieldInput() {
-		dialog.textX.setText("150");
-		dialog.textY.setText("250");
-		
-		assertEquals("150", dialog.textX.getText());
-		assertEquals("250", dialog.textY.getText());
-	}
+    @Test
+    void testCancelAction() {
+        dialog.setCancelClicked(true);
+        assertTrue(dialog.isCancelClicked());
+    }
 }

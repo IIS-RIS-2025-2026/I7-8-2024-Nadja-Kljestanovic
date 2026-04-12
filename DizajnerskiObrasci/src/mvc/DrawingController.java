@@ -260,10 +260,10 @@ public class DrawingController  {
 			
 			   dlgPoint= new DlgPoint();
 			   dlgPoint.setModal(true);
-			   dlgPoint.textX.setText(Integer.toString(e.getX()));
-			   dlgPoint.textY.setText(Integer.toString(e.getY()));
-			   dlgPoint.textX.setEnabled(false);
-			   dlgPoint.textY.setEnabled(false);
+			   dlgPoint.getTxtX().setText(Integer.toString(e.getX()));
+			   dlgPoint.getTxtY().setText(Integer.toString(e.getY()));
+			   dlgPoint.getTxtX().setEnabled(false);
+			   dlgPoint.getTxtY().setEnabled(false);
 			   dlgPoint.getBtnColor().setBackground(frame.getBtnBorderColor().getBackground());
 			   dlgPoint.setVisible(true);
 			   
@@ -354,8 +354,8 @@ public class DrawingController  {
 			dlgDonut.getTxtY().setEnabled(false);
 			dlgDonut.getTxtOuterRadius().setText("0");
 			dlgDonut.getTxtInnerRadius().setText("0");
-			dlgDonut.getBtnColor().setBackground(frame.getBtnBorderColor().getBackground());
-			dlgDonut.getBtnFill().setBackground(frame.getBtnFillColor().getBackground());
+			dlgDonut.setBorderColor(frame.getBtnBorderColor().getBackground());
+			dlgDonut.setFillColor(frame.getBtnFillColor().getBackground());
 			dlgDonut.setVisible(true);
 			if (dlgDonut.isCancelClicked() == true) {
 				newShape = null;
@@ -367,11 +367,11 @@ public class DrawingController  {
 		else if (frame.getSelectedButton() == "Hexagon") {
 			dlgHexagon = new DlgHexagon();
 			dlgHexagon.setModal(true);
-			dlgHexagon.getTxtFieldX().setText(Integer.toString(e.getX()));
-			dlgHexagon.getTxtFieldY().setText(Integer.toString(e.getY()));
-			dlgHexagon.getTxtFieldX().setEnabled(false);
-			dlgHexagon.getTxtFieldY().setEnabled(false);
-			dlgHexagon.getTxtFieldR().setText("0");
+			dlgHexagon.getTxtX().setText(Integer.toString(e.getX()));
+			dlgHexagon.getTxtY().setText(Integer.toString(e.getY()));
+			dlgHexagon.getTxtX().setEnabled(false);
+			dlgHexagon.getTxtY().setEnabled(false);
+			dlgHexagon.getTxtR().setText("0");
 			dlgHexagon.getBtnColor().setBackground(frame.getBtnBorderColor().getBackground());
 			dlgHexagon.getBtnFill().setBackground(frame.getBtnFillColor().getBackground());
 			dlgHexagon.setVisible(true);
@@ -421,7 +421,7 @@ public class DrawingController  {
 	}
 	
 	public void drawHexagon(MouseEvent e) {
-		int R= Integer.parseInt(dlgHexagon.getTxtFieldR().getText());
+		int R= Integer.parseInt(dlgHexagon.getTxtR().getText());
 		Color borderCol = dlgHexagon.getBtnColor().getBackground();
 		Color fillCol = dlgHexagon.getBtnFill().getBackground();
 		Hexagon hexagon= new Hexagon(e.getX(),e.getY(),R);
@@ -454,8 +454,8 @@ public class DrawingController  {
 		newShape = new Circle(new Point(e.getX(),e.getY()),radius,false,borderCol,fillCol);
 	}
 	public void drawDonut(MouseEvent e) {
-		Color borderCol = dlgDonut.getBtnColor().getBackground();
-		Color fillCol = dlgDonut.getBtnFill().getBackground();
+		Color borderCol = dlgDonut.getBorderColor();
+		Color fillCol = dlgDonut.getFillColor();
 		int outerRadius = Integer.parseInt(dlgDonut.getTxtOuterRadius().getText());
 		int innerRadius = Integer.parseInt(dlgDonut.getTxtInnerRadius().getText());
 		newShape = new Donut(new Point(e.getX(),e.getY()),outerRadius,innerRadius,false,borderCol,fillCol);
@@ -544,8 +544,8 @@ public class DrawingController  {
 				
 				int x = point.getX();
 				int y = point.getY();
-				dlgPoint.textX.setText(Integer.toString(x));
-				dlgPoint.textY.setText(Integer.toString(y));
+				dlgPoint.getTxtX().setText(Integer.toString(x));
+				dlgPoint.getTxtY().setText(Integer.toString(y));
 				dlgPoint.getBtnColor().setBackground(((Point) selectedShape).getBorderColor());
 				
 				
@@ -553,8 +553,8 @@ public class DrawingController  {
 				dlgPoint.setModal(true);
 				dlgPoint.setVisible(true);
 				
-				int xNew = Integer.parseInt(dlgPoint.textX.getText());
-				int yNew = Integer.parseInt(dlgPoint.textY.getText());
+				int xNew = Integer.parseInt(dlgPoint.getTxtX().getText());
+				int yNew = Integer.parseInt(dlgPoint.getTxtY().getText());
 				Color newBorderColor = dlgPoint.getBtnColor().getBackground();
 				
 				if (dlgPoint.isCancelClicked()== true) {
@@ -721,8 +721,8 @@ public class DrawingController  {
 				dlg.getTxtY().setText(Integer.toString(donut.getCenter().getY()));
 				dlg.getTxtOuterRadius().setText(Integer.toString(donut.getRadius()));
 				dlg.getTxtInnerRadius().setText(Integer.toString(donut.getInnerRadius()));
-				dlg.getBtnColor().setBackground(((Donut) selectedShape).getBorderColor());
-				dlg.getBtnFill().setBackground(((Donut) selectedShape).getFillColor());
+				dlg.setBorderColor(((Donut) selectedShape).getBorderColor());
+				dlg.setFillColor(((Donut) selectedShape).getFillColor());
 				
 				
 				
@@ -739,8 +739,8 @@ public class DrawingController  {
 					int yNew = Integer.parseInt(dlg.getTxtY().getText());
 					int outerRadius = Integer.parseInt(dlg.getTxtOuterRadius().getText());
 					int innerRadius = Integer.parseInt(dlg.getTxtInnerRadius().getText());
-					Color c1New = dlg.getBtnColor().getBackground();
-					Color c2New = dlg.getBtnFill().getBackground();	
+					Color c1New = dlg.getBorderColor();
+					Color c2New = dlg.getFillColor();	
 					
 				
 					
@@ -762,9 +762,9 @@ public class DrawingController  {
 				HexagonAdapter hexagonAdapter = (HexagonAdapter)selectedShape;
 				DlgHexagon dlg = new DlgHexagon();
 				
-				dlg.getTxtFieldX().setText(Integer.toString(hexagonAdapter.getHexagon().getX()));
-				dlg.getTxtFieldY().setText(Integer.toString(hexagonAdapter.getHexagon().getY()));
-				dlg.getTxtFieldR().setText(Integer.toString(hexagonAdapter.getHexagon().getR()));
+				dlg.getTxtX().setText(Integer.toString(hexagonAdapter.getHexagon().getX()));
+				dlg.getTxtY().setText(Integer.toString(hexagonAdapter.getHexagon().getY()));
+				dlg.getTxtR().setText(Integer.toString(hexagonAdapter.getHexagon().getR()));
 				dlg.getBtnColor().setBackground(((HexagonAdapter) selectedShape).getBorderColor());
 				dlg.getBtnFill().setBackground(((HexagonAdapter) selectedShape).getFillColor());
 				
@@ -779,9 +779,9 @@ public class DrawingController  {
 				else {
 				
 					
-					int xNew = Integer.parseInt(dlg.getTxtFieldX().getText());
-					int yNew = Integer.parseInt(dlg.getTxtFieldY().getText());
-					int rNew = Integer.parseInt(dlg.getTxtFieldR().getText());
+					int xNew = Integer.parseInt(dlg.getTxtX().getText());
+					int yNew = Integer.parseInt(dlg.getTxtY().getText());
+					int rNew = Integer.parseInt(dlg.getTxtR().getText());
 				
 					Color c1New = dlg.getBtnColor().getBackground();
 					Color c2New = dlg.getBtnFill().getBackground();	

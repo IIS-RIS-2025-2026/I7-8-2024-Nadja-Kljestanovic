@@ -15,16 +15,16 @@ class DlgDonutTest {
 
 	@Test
 	void testCheckIfNumberWithValidInput() {
-		assertTrue(dialog.CheckIfNumber("15"), "Treba da vrati true za validan ceo broj.");
-		assertTrue(dialog.CheckIfNumber("0"), "Treba da vrati true za nulu.");
+		assertTrue(dialog.isNumeric("15"), "Treba da vrati true za validan ceo broj.");
+		assertTrue(dialog.isNumeric("0"), "Treba da vrati true za nulu.");
 	}
 
 	@Test
 	void testCheckIfNumberWithInvalidInput() {
-		assertFalse(dialog.CheckIfNumber("xyz"), "Treba da vrati false za slova.");
-		assertFalse(dialog.CheckIfNumber(""), "Treba da vrati false za prazan string.");
-		assertFalse(dialog.CheckIfNumber(null), "Treba da vrati false za null.");
-		assertFalse(dialog.CheckIfNumber("20.5"), "Treba da vrati false za decimalni broj.");
+		assertFalse(dialog.isNumeric("xyz"), "Treba da vrati false za slova.");
+		assertFalse(dialog.isNumeric(""), "Treba da vrati false za prazan string.");
+		assertFalse(dialog.isNumeric(null), "Treba da vrati false za null.");
+		assertFalse(dialog.isNumeric("20.5"), "Treba da vrati false za decimalni broj.");
 	}
 
 	@Test
@@ -40,11 +40,11 @@ class DlgDonutTest {
 
 	@Test
 	void testColorSettersAndGetters() {
-		dialog.setC1(Color.BLACK);
-		dialog.setC2(Color.YELLOW);
+		dialog.setBorderColor(Color.BLACK);
+		dialog.setFillColor(Color.YELLOW);
 		
-		assertEquals(Color.BLACK, dialog.getC1(), "Boja ivice treba da bude crna.");
-		assertEquals(Color.YELLOW, dialog.getC2(), "Boja unutrašnjosti treba da bude žuta.");
+		assertEquals(Color.BLACK, dialog.getBorderColor(), "Boja ivice treba da bude crna.");
+		assertEquals(Color.YELLOW, dialog.getFillColor(), "Boja unutrašnjosti treba da bude žuta.");
 	}
 
 	@Test

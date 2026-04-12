@@ -15,17 +15,17 @@ class DlgCircleTest {
 
 	@Test
 	void testCheckIfNumberWithValidInput() {
-		assertTrue(dialog.CheckIfNumber("10"), "Treba da vrati true za validan ceo broj.");
-		assertTrue(dialog.CheckIfNumber("0"), "Treba da vrati true za nulu.");
-		assertTrue(dialog.CheckIfNumber("-5"), "Treba da vrati true za negativan broj.");
+		assertTrue(dialog.isNumeric("10"), "Treba da vrati true za validan ceo broj.");
+		assertTrue(dialog.isNumeric("0"), "Treba da vrati true za nulu.");
+		assertTrue(dialog.isNumeric("-5"), "Treba da vrati true za negativan broj.");
 	}
 
 	@Test
 	void testCheckIfNumberWithInvalidInput() {
-		assertFalse(dialog.CheckIfNumber("abc"), "Treba da vrati false za tekst.");
-		assertFalse(dialog.CheckIfNumber(""), "Treba da vrati false za prazan string.");
-		assertFalse(dialog.CheckIfNumber(null), "Treba da vrati false za null.");
-		assertFalse(dialog.CheckIfNumber("10.5"), "Treba da vrati false za decimalni broj.");
+		assertFalse(dialog.isNumeric("abc"), "Treba da vrati false za tekst.");
+		assertFalse(dialog.isNumeric(""), "Treba da vrati false za prazan string.");
+		assertFalse(dialog.isNumeric(null), "Treba da vrati false za null.");
+		assertFalse(dialog.isNumeric("10.5"), "Treba da vrati false za decimalni broj.");
 	}
 
 	@Test
@@ -39,11 +39,11 @@ class DlgCircleTest {
 
 	@Test
 	void testColorSettersAndGetters() {
-		dialog.setC1(Color.RED);
-		dialog.setC2(Color.BLUE);
+		dialog.setBorderColor(Color.RED);
+		dialog.setFillColor(Color.BLUE);
 		
-		assertEquals(Color.RED, dialog.getC1(), "Boja ivice (c1) treba da bude crvena.");
-		assertEquals(Color.BLUE, dialog.getC2(), "Boja unutrašnjosti (c2) treba da bude plava.");
+		assertEquals(Color.RED, dialog.getBorderColor(), "Boja ivice (c1) treba da bude crvena.");
+		assertEquals(Color.BLUE, dialog.getFillColor(), "Boja unutrašnjosti (c2) treba da bude plava.");
 	}
 
 	@Test

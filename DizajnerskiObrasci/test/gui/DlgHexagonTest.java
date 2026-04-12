@@ -14,15 +14,15 @@ class DlgHexagonTest {
 
 	@Test
 	void testCheckIfNumberWithValidInput() {
-		assertTrue(dialog.CheckIfNumber("10"), "Treba da vrati true za validan broj.");
-		assertTrue(dialog.CheckIfNumber("0"), "Treba da vrati true za nulu.");
+		assertTrue(dialog.isNumeric("10"), "Treba da vrati true za validan broj.");
+		assertTrue(dialog.isNumeric("0"), "Treba da vrati true za nulu.");
 	}
 
 	@Test
 	void testCheckIfNumberWithInvalidInput() {
-		assertFalse(dialog.CheckIfNumber("hex"), "Treba da vrati false za tekstualni unos.");
-		assertFalse(dialog.CheckIfNumber(""), "Treba da vrati false za prazan string.");
-		assertFalse(dialog.CheckIfNumber(null), "Treba da vrati false za null.");
+		assertFalse(dialog.isNumeric("hex"), "Treba da vrati false za tekstualni unos.");
+		assertFalse(dialog.isNumeric(""), "Treba da vrati false za prazan string.");
+		assertFalse(dialog.isNumeric(null), "Treba da vrati false za null.");
 	}
 
 	@Test
@@ -38,13 +38,13 @@ class DlgHexagonTest {
 
 	@Test
 	void testTextFieldAccess() {
-		dialog.getTxtFieldX().setText("100");
-		dialog.getTxtFieldY().setText("150");
-		dialog.getTxtFieldR().setText("40");
+		dialog.getTxtX().setText("100");
+		dialog.getTxtY().setText("150");
+		dialog.getTxtR().setText("40");
 		
-		assertEquals("100", dialog.getTxtFieldX().getText());
-		assertEquals("150", dialog.getTxtFieldY().getText());
-		assertEquals("40", dialog.getTxtFieldR().getText());
+		assertEquals("100", dialog.getTxtX().getText());
+		assertEquals("150", dialog.getTxtY().getText());
+		assertEquals("40", dialog.getTxtR().getText());
 	}
 
 	@Test
