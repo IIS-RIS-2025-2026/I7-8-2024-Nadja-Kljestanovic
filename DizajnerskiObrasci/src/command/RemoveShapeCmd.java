@@ -24,7 +24,7 @@ public class RemoveShapeCmd implements Command {
 	}
 	
 	public void unexecute() {
-		model.addWithIndex(index, shape);
+		model.addAtIndex(index, shape);
 		listOfSelectedShapes.add(shape);
 	}
 }

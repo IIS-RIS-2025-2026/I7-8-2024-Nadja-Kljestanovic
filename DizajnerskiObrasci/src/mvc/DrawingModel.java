@@ -1,31 +1,37 @@
 package mvc;
 
 import java.util.ArrayList;
-
-import geometry.Point;
+import java.util.List;
 import geometry.Shape;
 
 public class DrawingModel {
-	private ArrayList<Shape> shapes = new ArrayList<Shape>(); // Ovo koristi na projektu
-	private ArrayList<Point> shapes1 = new ArrayList<Point>(); // Ovo izbrisi kad iskoristis shapes
-			
-	public void add (Shape newShape) {
-			   shapes.add(newShape);
-   }
-	
-	public void addWithIndex(int index,Shape newShape) {
-		shapes.add(index, newShape);
+	private List<Shape> shapes = new ArrayList<>();
+
+	public void add(Shape shape) {
+		shapes.add(shape);
 	}
-	
-	public void remove(Shape p) {
-		shapes.remove(p);
+
+	public void addAtIndex(int index, Shape shape) {
+		shapes.add(index, shape);
 	}
-	
+
+	public void remove(Shape shape) {
+		shapes.remove(shape);
+	}
+
 	public Shape get(int index) {
 		return shapes.get(index);
 	}
-	
-	public ArrayList<Shape> getShapes(){
+
+	public List<Shape> getShapes() {
 		return shapes;
+	}
+
+	public int size() {
+		return shapes.size();
+	}
+	
+	public boolean isEmpty() {
+		return shapes.isEmpty();
 	}
 }

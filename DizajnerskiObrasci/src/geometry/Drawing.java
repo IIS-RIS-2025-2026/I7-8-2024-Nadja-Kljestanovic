@@ -19,7 +19,7 @@ public class Drawing extends JPanel{
 	
 	public void paint(Graphics g) {
 		// Zadatak 1
-		Point p1= new Point(300,300);
+		/*Point p1= new Point(300,300);
 		Line l1 = new Line (new Point (100,100),new Point (150,150));
 		Circle c1= new Circle (new Point(20,80),20);
 		
@@ -61,7 +61,7 @@ public class Drawing extends JPanel{
 			gf.moveBy(10, 0);
 			gf.setSelected(true);
 			gf.draw(g);
-		}
+		}*/
 	}
 	
 }

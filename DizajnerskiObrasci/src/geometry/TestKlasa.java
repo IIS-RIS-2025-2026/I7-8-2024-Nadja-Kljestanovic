@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class TestKlasa {
 
 	public static void main(String[] args) {
-		// Vezbe 2
+		/* Vezbe 2
 		Point p = new Point();
 		// System.out.println(p.x);
 		// System.out.println(p.y);
@@ -68,7 +68,7 @@ public class TestKlasa {
 		 * pocetne i krajnje tacke prethodno kreirane linije lin (NE duzine). Sve
 		 * objekte kreirati samostalno.
 		 */
-		Circle c2 = new Circle();
+		/*Circle c2 = new Circle();
 		//c2.setRadius(5);
 		Line lin = new Line();
 		Point t1 = new Point();
@@ -163,7 +163,7 @@ public class TestKlasa {
 		for (int j = 0; j < shapes.length; j++) {
 			shapes[i].moveBy(10, 15);
 		}
-		System.out.print("s");
+		System.out.print("s");*/
 		
 		
 
