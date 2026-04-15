@@ -5,5 +5,9 @@
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="lib" path="jar/heksagon (1).jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="lib" path="d:/Nadja/Downloads/mockito-core-3.12.4.jar"/>
+	<classpathentry kind="lib" path="d:/Nadja/Downloads/byte-buddy-1.11.13.jar"/>
+	<classpathentry kind="lib" path="d:/Nadja/Downloads/byte-buddy-agent-1.11.13.jar"/>
+	<classpathentry kind="lib" path="d:/Nadja/Downloads/objenesis-3.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

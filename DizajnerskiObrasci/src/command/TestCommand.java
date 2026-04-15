@@ -10,10 +10,9 @@ public class TestCommand {
 
 	public static void main(String[] args) {
 		
-		DrawingModel model = new DrawingModel();
+		/*DrawingModel model = new DrawingModel();
 		Point p1 = new Point(10,10,false,Color.RED);
-		Point p2 = new Point(20,20,false,Color.black);
-		
+		Point p2 = new Point(20,20,false,Color.black);/*/		
 		// Testiranje dodavanja tacke
 		
 		/*AddPointCmd addPointCmd = new AddPointCmd(p1,model);
@@ -54,7 +53,7 @@ public class TestCommand {
 		System.out.println(p1);
 		
 		*/
-		Point point1 = new Point(30,30,false,Color.BLACK);
+		/*Point point1 = new Point(30,30,false,Color.BLACK);
 		Point point2 = new Point(40,40,false,Color.GREEN);
 		Point point3 = new Point(50,50,false,Color.DARK_GRAY);
 		
